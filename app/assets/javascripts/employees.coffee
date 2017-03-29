@@ -1,3 +1,14 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+employees = new Vue(
+  el: '#employees'
+  data: employees: []
+  mounted: ->
+    that = undefined
+    that = this
+    $.ajax
+      url: '/employees.json'
+      success: (res) ->
+        that.employees = res
+        console.log res
+        return
+    return
+)
