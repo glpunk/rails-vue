@@ -1,0 +1,19 @@
+script#employee-hire type="text/x-template" 
+  tr
+    td
+      /! Input
+      input type="text" v-model="name" /
+      br/
+      /! Validation errors
+      span style="color:red"= '{{ errors.name }}'
+    td
+      /! Input
+      input type="text" v-model="email" /
+      br/
+      /! Validation errors
+      span style="color:red"= '{{ errors.email }}'
+    td
+      input type="checkbox" v-model="manager" /
+    /! button click calls hireEmployee
+    td
+      button @click="hireEmployee" Hire

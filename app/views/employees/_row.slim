@@ -1,0 +1,24 @@
+script#employee-row type="text/x-template" 
+  tr
+    template(v-if="editMode")
+      td
+        input type="text" v-model="employee.name" /
+        br/
+        span style="color:red"= '{{ errors.name }}' 
+      td 
+        input type="text" v-model="employee.email" /
+        br/
+        span style="color:red"= '{{ errors.email }}'  
+      td
+        input type="checkbox" v-model="employee.manager" / 
+      td
+        employee-update type='save' :employee='employee' v-on:updated="editMode = false" 
+        button(@click="editMode = false") Cancel
+    template(v-else)
+      td= '{{ employee.name }}'
+      td= '{{ employee.email }}'
+      td= "{{ employee.manager ? 'YES' : 'NO' }}"
+      td
+        button(@click="editMode = true") Edit
+        employee-update type='promote' :employee='employee' v-on:updated="editMode = false" 
+        employee-fire :editMode="editMode" :employee='employee' :index='index'

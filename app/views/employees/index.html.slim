@@ -1,3 +1,6 @@
+=render 'hire'
+=render 'row'
+
 h1 Employees
 #employees
   table
@@ -7,7 +10,9 @@ h1 Employees
         th Email
         th Manager
     tbody
-      tr v-for=("employee in employees") 
-        td= "{{ employee.name }}"
-        td= "{{ employee.email }}"
-        td= "{{ employee.manager }}" 
+      tr(:employee="employee" is="employee-row" :index="index" v-for="(employee, index) in employees") 
+      tr(is="employee-hire") 
+      
+
+
+
