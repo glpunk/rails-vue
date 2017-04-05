@@ -5,14 +5,16 @@ Vue.component 'employee-update',
     type: String 
   filters:
     setLabel: (type, employee) ->
-      console.log employee
-      if type == 'save'
-        return 'Save'
+      l = ''
+      if employee.manager
+        l = 'Demote' 
       else 
-        if employee.manager
-          return 'Demote' 
-        else 
-          return 'Promote'
+        l = 'Promote'
+
+      if type == 'save'
+        l = 'Save'
+
+      return l
   methods: 
     updateEmployee: ->
       that = this
