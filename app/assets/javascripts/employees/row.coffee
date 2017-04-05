@@ -8,3 +8,7 @@ Vue.component 'employee-row',
       editMode: false
       errors: {}
     }
+  methods:
+    updateEmployee: (data) ->
+      console.log 'updateEmployee', data
+      

@@ -10,7 +10,7 @@ h1 Employees
         th Email
         th Manager
     tbody
-      tr(:employee="employee" is="employee-row" :index="index" v-for="(employee, index) in employees") 
+      tr(:employee="employee" is="employee-row" :key="employee.id" :index="index" v-for="(employee, index) in employees") 
       tr(is="employee-hire") 
       
 

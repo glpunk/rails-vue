@@ -4,7 +4,7 @@
 #= require employees/hire
 #= require interceptors
 
-@employeesList = new Vue(
+employeesList = new Vue(
   el: '#employees'
   data: 
     employees: []
@@ -13,6 +13,11 @@
       email: ''
       manager: false
     errors: {}
+  created: ->
+    that = this
+    bus.$on 'employeeList-updated', (data) ->
+      that.employees = data
+
   mounted: ->
     that = undefined
     that = this

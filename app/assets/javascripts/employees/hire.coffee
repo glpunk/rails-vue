@@ -17,7 +17,6 @@ Vue.component 'employee-hire',
 
       employeeResource.save({employee: send.data}).then ((response) ->
         that.errors = {}
-        employeesList.employees.push response.data
         return
       ), (response) ->
         console.log response
