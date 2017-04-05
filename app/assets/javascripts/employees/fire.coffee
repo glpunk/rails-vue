@@ -7,11 +7,13 @@ Vue.component 'employee-fire',
   methods: 
     fireEmployee: ->
       that = this
-      $.ajax
-        method: 'DELETE'
-        url: '/employees/' + that.employee.id + '.json'
-        success: (res) ->
-          console.log that.index
-          employeesList.employees.splice(that.index, 1)
-          return
+      employeeResource.delete({id: that.employee.id}).then ((response) ->
+        that.errors = {}
+        employeesList.employees.splice(that.index, 1)
+        return
+      ), (response) ->
+        console.log response
+        return
       return
+
+

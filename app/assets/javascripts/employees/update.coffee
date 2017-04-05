@@ -16,18 +16,13 @@ Vue.component 'employee-update',
   methods: 
     updateEmployee: ->
       that = this
-      if that.type = 'promote'
+      if that.type == 'promote'
         that.employee.manager = !that.employee.manager
 
-      $.ajax
-        method: 'PUT'
-        data: employee: that.employee
-        url: '/employees/' + that.employee.id + '.json'
-        success: (res) ->
-          that.errors = {}
-          that.$emit('updated')
-          return
-        error: (res) ->
-          that.errors = res.responseJSON.errors
-          return
-      return
+      employeeResource.update({id: that.employee.id}, {employee: that.employee}).then ((response) ->
+        that.errors = {}
+        that.$emit('updated')
+        return
+      ), (response) ->
+        that.errors = res.responseJSON.errors
+        return

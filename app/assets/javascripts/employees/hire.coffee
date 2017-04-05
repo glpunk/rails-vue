@@ -9,21 +9,17 @@ Vue.component 'employee-hire',
     }
   methods: 
     hireEmployee: ->
-      that = this
-      employeesList
-      $.ajax
-        method: 'POST'
-        data: 
-          employee:
-            name: @name
-            email: @email
-            manager: @manager
-        url: '/employees.json'
-        success: (res) ->
-          that.errors = {}
-          employeesList.employees.push res
-          return
-        error: (res) ->
-          that.errors = res.responseJSON.errors
-          return
+      that = this 
+      send = data:
+        name: @name
+        email: @email
+        manager: @manager
+
+      employeeResource.save({employee: send.data}).then ((response) ->
+        that.errors = {}
+        employeesList.employees.push response.data
+        return
+      ), (response) ->
+        console.log response
+        return
       return

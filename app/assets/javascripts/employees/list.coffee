@@ -2,6 +2,7 @@
 #= require employees/fire
 #= require employees/row
 #= require employees/hire
+#= require interceptors
 
 @employeesList = new Vue(
   el: '#employees'
@@ -15,10 +16,11 @@
   mounted: ->
     that = undefined
     that = this
-    $.ajax
-      url: '/employees.json'
-      success: (res) ->
-        that.employees = res
-        return
-    return
+    employeeResource.get('/employees.json').then ((response) ->
+      that.errors = {}
+      that.employees = response.data
+      return
+    ), (response) ->
+      that.errors = response.data.errors
+      return
 )
