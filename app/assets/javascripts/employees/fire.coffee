@@ -9,7 +9,6 @@ Vue.component 'employee-fire',
       that = this
       employeeResource.delete({id: that.employee.id}).then ((response) ->
         that.errors = {}
-        employeesList.employees.splice(that.index, 1)
         return
       ), (response) ->
         console.log response
